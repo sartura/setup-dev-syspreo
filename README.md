@@ -32,11 +32,29 @@ Example of running the application in user space are shown below:
 > \
 > netopeer2-server -d &
 
+> export PATH=$PATH:/tmp/sysrepofs/bin \
+> export LD_LIBRARY_PATH="/tmp/sysrepofs/lib;/lib" \
+> \
+> netopeer2-cli
+
+> export PATH=$PATH:/tmp/sysrepofs/bin \
+> export LD_LIBRARY_PATH="/tmp/sysrepofs/lib;/lib" \
+> \
+> sysrepod -d -l 4
+
 Example of running the application in root space are shown below:
 
 > export PATH=$PATH:/tmp/sysrepofs/bin \
 > \
 > sudo LD_LIBRARY_PATH="/tmp/sysrepofs/lib;/lib" netopeer2-server -d &
+
+Note: if you have ran netopeer2 in user space before you will need to clean the shared memory by executing:
+> sudo rm /dev/shm/sr_*
+
+> export PATH=$PATH:/tmp/sysrepofs/bin \
+> export LD_LIBRARY_PATH="/tmp/sysrepofs/lib;/lib" \
+> \
+> sudo sysrepod -d -l 4
 
 # Sysrepo plugin development
 
