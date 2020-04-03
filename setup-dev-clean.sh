@@ -40,13 +40,13 @@ sudo make uninstall
 echo
 
 echo "Removing services /etc/systemd/system/sysrepo-*"
-sudo rm /etc/systemd/system/sysrepo-*
+sudo rm /etc/systemd/system/sysrepo-* || true
 
 echo
 
 cd $START_DIR
 
 echo "Removing ${SYSREPO_DIR}"
-sudo rm -rf $SYSREPO_DIR
+sudo rm -rf $SYSREPO_DIR || true
 
 echo
