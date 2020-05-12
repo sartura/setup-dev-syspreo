@@ -29,12 +29,7 @@ sudo make uninstall
 echo
 
 echo "Cleaning ${SYSREPO_DIR}/repositories/Netopeer2"
-cd $SYSREPO_DIR/repositories/Netopeer2/cli/build
-sudo make uninstall
-
-echo
-
-cd $SYSREPO_DIR/repositories/Netopeer2/server/build
+cd $SYSREPO_DIR/repositories/Netopeer2/build
 sudo make uninstall
 
 echo
