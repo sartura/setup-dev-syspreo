@@ -80,11 +80,7 @@ echo
 ## Netopeer2
 
 git clone https://github.com/CESNET/Netopeer2.git && cd Netopeer2
-cd cli && mkdir build && cd build
-cmake -DCMAKE_PREFIX_PATH=$SYSREPO_DIR -DCMAKE_INSTALL_PREFIX=$SYSREPO_DIR -DCMAKE_BUILD_TYPE=Debug ..
-make -j2 && make install
-cd ../../
-cd server && mkdir build && cd build
+mkdir build && cd build
 cmake -DCMAKE_PREFIX_PATH=$SYSREPO_DIR -DCMAKE_INSTALL_PREFIX=$SYSREPO_DIR -DCMAKE_BUILD_TYPE=Debug -DPIDFILE_PREFIX=$SYSREPO_DIR/var/run ..
 make -j2
 LD_LIBRARY_PATH=$SYSREPO_DIR/lib make install
