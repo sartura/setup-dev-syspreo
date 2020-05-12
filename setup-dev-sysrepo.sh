@@ -152,9 +152,9 @@ echo
 # sr_uci
 
 git clone git@github.com:sartura/sr_uci.git && cd sr_uci
-git checkout sysrepo-1.x.x
+git checkout devel
 mkdir build && cd build
-cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_PREFIX_PATH=$SYSREPO_DIR -DCMAKE_INSTALL_PREFIX=$SYSREPO_DIR -DCMAKE_BUILD_TYPE=Debug ..
+cmake -DCMAKE_PREFIX_PATH=$SYSREPO_DIR -DCMAKE_INSTALL_PREFIX=$SYSREPO_DIR -DCMAKE_BUILD_TYPE=Debug ..
 make -j2 && make install
 cd $SYSREPO_DIR/repositories/plugins
 
