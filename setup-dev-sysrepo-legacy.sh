@@ -78,6 +78,15 @@ cd $SYSREPO_DIR/repositories
 
 echo
 
+## libcmocka
+git clone git://git.cryptomilk.org/projects/cmocka.git && cd cmocka
+mkdir build && cd build
+cmake -DCMAKE_INSTALL_PREFIX=$SYSREPO_DIR -DCMAKE_BUILD_TYPE=Debug ..
+make -j2 && make install
+cd $SYSREPO_DIR/repositories
+
+echo
+
 ## sysrepo
 
 git clone https://github.com/sysrepo/sysrepo.git --branch legacy && cd sysrepo
