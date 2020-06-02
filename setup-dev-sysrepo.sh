@@ -19,6 +19,8 @@ cd $SYSREPO_DIR/repositories
 
 wget https://netcologne.dl.sourceforge.net/project/pcre/pcre/8.43/pcre-8.43.zip
 unzip pcre-8.43.zip && rm pcre-8.43.zip && cd pcre-8.43
+sed -i 's,LIBRARY DESTINATION lib,LIBRARY DESTINATION lib64,' CMakeLists.txt
+sed -i 's,ARCHIVE DESTINATION lib,ARCHIVE DESTINATION lib64,' CMakeLists.txt
 mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=$SYSREPO_DIR -DBUILD_SHARED_LIBS=ON -DPCRE_SUPPORT_UTF=ON -DPCRE_SUPPORT_UNICODE_PROPERTIES=ON -DPCRE_SUPPORT_VALGRIND=ON ..
 make -j2 && make install
@@ -80,6 +82,13 @@ echo
 ## Netopeer2
 
 git clone https://github.com/CESNET/Netopeer2.git && cd Netopeer2
+# fix setup
+sed -i "/SYSREPOCTL=/c\\SYSREPOCTL=${SYSREPO_DIR}/bin/sysrepoctl" scripts/setup.sh
+# fix merge_hostkey
+sed -i "/SYSREPOCFG=/c\\SYSREPOCFG=${SYSREPO_DIR}/bin/sysrepocfg" scripts/merge_hostkey.sh
+sed -i "/OPENSSL=/c\\OPENSSL=${SYSREPO_DIR}/bin/openssl" scripts/merge_hostkey.sh
+# fix merge_config
+sed -i "/SYSREPOCFG=/c\\SYSREPOCFG=${SYSREPO_DIR}/bin/sysrepocfg" scripts/merge_config.sh
 mkdir build && cd build
 cmake -DCMAKE_PREFIX_PATH=$SYSREPO_DIR -DCMAKE_INSTALL_PREFIX=$SYSREPO_DIR -DCMAKE_BUILD_TYPE=Debug -DPIDFILE_PREFIX=$SYSREPO_DIR/var/run ..
 make -j2
@@ -127,21 +136,21 @@ cd $SYSREPO_DIR/repositories
 
 echo
 
-## rpcd
-
-git clone git://git.openwrt.org/project/rpcd.git && cd rpcd
-mkdir build && cd build
-cmake -DCMAKE_INSTALL_PREFIX:PATH=$SYSREPO_DIR -DFILE_SUPPORT=OFF -DRPCSYS_SUPPORT=OFF -DIWINFO_SUPPORT=OFF ..
-make -j2 && make install
-cd $SYSREPO_DIR/repositories
-
-echo
-
 ## libuci
 
 git clone https://git.lede-project.org/project/uci.git && cd uci
 mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=$SYSREPO_DIR -DBUILD_LUA=OFF ..
+make -j2 && make install
+cd $SYSREPO_DIR/repositories
+
+echo
+
+## rpcd
+
+git clone git://git.openwrt.org/project/rpcd.git && cd rpcd
+mkdir build && cd build
+cmake -DCMAKE_INSTALL_PREFIX:PATH=$SYSREPO_DIR -DFILE_SUPPORT=OFF -DRPCSYS_SUPPORT=OFF -DIWINFO_SUPPORT=OFF ..
 make -j2 && make install
 cd $SYSREPO_DIR/repositories
 
