@@ -158,7 +158,7 @@ echo
 
 git clone git@github.com:sartura/srpo.git && cd srpo
 mkdir build && cd build
-cmake -DCMAKE_PREFIX_PATH=$SYSREPO_DIR -DCMAKE_INSTALL_PREFIX=$SYSREPO_DIR -DCMAKE_BUILD_TYPE=Debug ..
+cmake -DCMAKE_PREFIX_PATH=$SYSREPO_DIR -DCMAKE_INSTALL_PREFIX=$SYSREPO_DIR -DCMAKE_BUILD_TYPE=Debug -DUCI_CONFIG_DIR="$SYSREPO_DIR/etc/config" ..
 make -j2 && make install
 cd $SYSREPO_DIR/repositories/plugins
 
