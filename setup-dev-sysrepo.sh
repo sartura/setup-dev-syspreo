@@ -137,6 +137,15 @@ cd $SYSREPO_DIR/repositories
 
 echo
 
+## libuci 2
+
+git clone https://github.com/sartura/uci2.git; mkdir uci2/build; cd uci2/build;
+cmake -DCMAKE_INSTALL_PREFIX=$SYSREPO_DIR ../
+make -j$(nproc); make -j$(nproc) install
+cd $SYSREPO_DIR/repositories
+
+echo
+
 ## rpcd
 
 git clone git://git.openwrt.org/project/rpcd.git; cd rpcd; mkdir build; cd build
